@@ -1,6 +1,6 @@
 # Symbolic regression lattice examples
 
-Generate some funtions with noise and then use symbolic
+Generate some functions with noise and then use symbolic
 regression to try to reproduce the original function.
 
 The symbolic regression library used is
@@ -13,4 +13,9 @@ Does Bayesian model averaging improve polynomial extrapolations? Two toy problem
 M.A. Connell   , I. Billig    , D.R. Phillips
 J.Phys.G 48 (2021) 10, 104001
 2106.05906 [stat.ME]
+
+The simulation is generated in the **data** directory.
+
+The file simulate.py generates the simulated data.
+
 
