@@ -1,0 +1,5 @@
+filename: np_g2_model_store.npy
+func: "\n   Model function from Philips et al\n   g(x) = (1.3 / (x + 1.3) )**2 \n\n\
+  \   "
+nomeas: 10000
+sigma: 0.2

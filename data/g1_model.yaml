@@ -1,0 +1,4 @@
+filename: np_g1_model_store.npy
+func: "\n   g(x) = (1/2 + tan(pi*x/2)**2 \n   "
+nomeas: 10000
+sigma: 0.2
