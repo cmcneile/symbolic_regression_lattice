@@ -10,10 +10,7 @@
 
 
 import numpy as  np
-import matplotlib.pyplot as plt
 import math
-import gvar as gv
-import lsqfit as lsq
 import sys
 
 import yaml
@@ -23,19 +20,12 @@ from util_func import g1
 from util_func import g2
 from util_func import g3
 
-## simulation extrapolation
-from  util_extrap_func import  extrap3
-from  util_extrap_func import  extrap3_rat
-from  util_extrap_func import  extrap5
-
-
 # simulation parameters
 nsimp = 10000
 mu = 0 
 sigma = 0.2
 
-model_pt = 0
-extrap_pt = 3
+model_pt = 2
 
 #####
 
@@ -70,10 +60,6 @@ y_val = [ g(x_) for x_ in x_val ]
 
 print("x=  " , x_val) 
 print("y=  " , y_val) 
-
-plt.plot(x_val, y_val, "ro" , label="Exact " + g_string )
-#plt.show()
-
 
 
 ndim = len(x_val)
@@ -120,6 +106,7 @@ info["filename"] = nout
 info["func"] = g.__doc__
 info["nomeas"] = nsimp
 info["sigma"] = sigma
+info["model_pt"] = model_pt
 
 
 
@@ -133,70 +120,3 @@ with open(yaml_out, 'w') as file:
 
 print("Metadata has been written to ", yaml_out)
 
-
-    
-#print("corr_mean = " , corr_mean)
-#sys.exit(0)
-
-plt.errorbar(x_val, corr_mean, corr_err, fmt = "go" , label="Simulation " + g_string )
-plt.legend()
-
-
-print("Start of GPL analysis")
-
-gpl_data = [] 
-for i in range(0, ndim) :
-  gpl_data.append( gv.gvar(corr_mean[i], corr_err[i]  ))
-
-print("gpl = ", gpl_data)
-
-
-
-
-prior = {}
-prior['a'] = [gv.gvar('0.0(2.0)'),gv.gvar(0,2),gv.gvar(0,2),gv.gvar(0,2),gv.gvar(0,2) ]
-p0 = np.array([ 0.5, 1, 0 , 0 , 0])
-
-if extrap_pt == 1 :
-  extrap = extrap3_rat
-  extrap_title = r"$(p_0  + p_1 x)/( 1 + p_2 x^2) $"
-elif extrap_pt == 2 :
-  extrap = extrap3
-  extrap_title = r"$p_0  + p_1 x + p_2 x^2$"
-elif extrap_pt == 3 :
-  extrap = extrap5
-  extrap_title = r"$p_0  + p_1 * x + p_2 x^2 + p_3 *x^3 + p_4 x^4$"
-else:
-  print("No extrapolation")    
-  sys.exit(0)
-
-  
-#
-
-
-
-
-
-
-##---------------------------------------------------
-
-
-fit_A = lsq.nonlinear_fit(data=(x_val,gpl_data),prior=prior,fcn=extrap, p0=p0)
-
-#----------------------------------------------------
-
-print(g.__doc__)
-print(extrap.__doc__)
-print(fit_A)
-
-
-fitline_A = extrap(x_val ,fit_A.p)
-
-plt.plot(x_val,[ x.mean for x in fitline_A], "--ko" , label="fit f(x)= " + extrap_title)
-
-plt.legend()
-plt.xlabel("x")
-plt.ylabel(r"y")
-
-plt.savefig(out_name + ".png")
-plt.show()
