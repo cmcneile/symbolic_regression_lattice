@@ -72,8 +72,12 @@ x = x_val
 
 plt.errorbar(x,y,corr_err, fmt= "ro")
 
-plt.xlabel(r"x")
-plt.ylabel(r"y")
+plt.xlabel(r"$G_A(Q^2)$")
+plt.ylabel(r"$Q^2$ GeV$^2$")
+
+#plt.xlabel(r"x")
+#plt.ylabel(r"y")
+
 
 if 0 :
   plt.show()
@@ -136,17 +140,20 @@ yy = [  ans.subs(x0, xx_) for xx_ in xx  ]
 
 plt.plot(xx,yy, "k", label="symbolic regression fit")
 
-plt.errorbar(x,y,corr_err, fmt= "ro" , label="simulation")
+#plt.errorbar(x,y,corr_err, fmt= "ro" , label="simulation")
+plt.errorbar(x,y,corr_err, fmt= "ro" , label="lattice data")
 
 plt.title("Model function versus fit")
 
 plt.legend()
-plt.xlabel(r"x")
-plt.ylabel(r"y")
+#plt.xlabel(r"x")
+#plt.ylabel(r"y")
+plt.ylabel(r"$G_A(Q^2)$")
+plt.xlabel(r"$Q^2$ GeV$^2$")
 
 
 
-#plt.savefig("PM10_temp_Dartmoor.png")
+plt.savefig("symbolic_plot.png")
 plt.show()
 
 ###

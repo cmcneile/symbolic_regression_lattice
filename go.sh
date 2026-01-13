@@ -2,8 +2,10 @@
 
 ./clean.sh
 
-./fit.py ./data/g1_model.yaml
+#./fit.py ./data/g1_model.yaml
 #./fit.py ./data/g3_model.yaml
+
+./fit.py ../formfactor/etmc/ga_etmc.yaml
 
 echo "Job run at "
 date
