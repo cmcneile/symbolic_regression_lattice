@@ -179,10 +179,10 @@ def model_G()  :
  """
  model = PySRRegressor(
 #     model_selection='accuracy',
-##    niterations=40,  # < Increase me for better results
+    niterations=40,  # < Increase me for better results
 #     niterations=300,  # < Increase me for better results
     denoise=True,
-     niterations=1000,  # < Increase me for better results
+#     niterations=1000,  # < Increase me for better results
     binary_operators=["+", "*" , "/" , "-"],
     unary_operators=[
 #        "cos",

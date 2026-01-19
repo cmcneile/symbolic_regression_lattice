@@ -128,7 +128,7 @@ print(ans)
 
 
 ##
-##  plot thw fit
+##  plot the fit
 ##
 
 xx = np.linspace(xp[0], xp[-1], num=100 )
